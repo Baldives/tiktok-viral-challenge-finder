@@ -1,0 +1,37 @@
+{
+  "actor": {
+    "name": "TikTok Viral Challenge Finder",
+    "version": "0.1",
+    "buildTag": "latest",
+    "input": {
+      "type": "object",
+      "title": "Input",
+      "properties": {
+        "niche": {
+          "title": "Niche / Keyword",
+          "type": "string",
+          "description": "e.g. dance, GRWM, pet, cooking",
+          "editor": "textfield"
+        },
+        "minViews": {
+          "title": "Min views (last 7 days)",
+          "type": "integer",
+          "default": 500000,
+          "unit": "views"
+        },
+        "maxResults": {
+          "title": "Max results",
+          "type": "integer",
+          "default": 10,
+          "maximum": 30
+        },
+        "region": {
+          "title": "Region",
+          "type": "string",
+          "default": "global",
+          "enum": ["global", "US", "UK", "DE", "FR", "BR", "IN"]
+        }
+      }
+    }
+  }
+}
