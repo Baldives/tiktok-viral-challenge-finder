@@ -1,6 +1,8 @@
 {
   "title": "TikTok Viral Challenge Finder",
+  "description": "Find exploding TikTok challenges & viral hashtags before they peak. Real-time views + virality score. Perfect for creators & marketers.",
   "type": "object",
+  "schemaVersion": 1,
   "properties": {
     "niche": {
       "title": "Niche / Keyword",
