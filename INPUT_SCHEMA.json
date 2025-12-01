@@ -1,0 +1,31 @@
+{
+  "title": "TikTok Viral Challenge Finder",
+  "type": "object",
+  "properties": {
+    "niche": {
+      "title": "Niche / Keyword",
+      "type": "string",
+      "description": "e.g. dance, fitness, food, pet, beauty (leave empty for global trending)",
+      "editor": "textfield",
+      "prefill": ""
+    },
+    "minViews": {
+      "title": "Minimum estimated views (7 days)",
+      "type": "integer",
+      "default": 250000,
+      "minimum": 10000,
+      "maximum": 10000000,
+      "unit": "views",
+      "editor": "number"
+    },
+    "maxResults": {
+      "title": "Max challenges to return",
+      "type": "integer",
+      "default": 15,
+      "minimum": 5,
+      "maximum": 30,
+      "editor": "number"
+    }
+  },
+  "required": []
+}
