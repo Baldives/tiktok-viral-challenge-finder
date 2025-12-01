@@ -7,13 +7,14 @@
     "niche": {
       "title": "Niche / Keyword",
       "type": "string",
-      "description": "e.g. dance, fitness, food, pet, beauty (leave empty for global trending)",
+      "description": "Keyword or topic to search for trending challenges (e.g., 'dance', 'fitness', 'food'). Leave empty for global trending.",
       "editor": "textfield",
       "prefill": ""
     },
     "minViews": {
       "title": "Minimum estimated views (7 days)",
       "type": "integer",
+      "description": "Filter challenges by minimum estimated views in the last 7 days (e.g., 250000 for 250K+ views).",
       "default": 250000,
       "minimum": 10000,
       "maximum": 10000000,
@@ -23,6 +24,7 @@
     "maxResults": {
       "title": "Max challenges to return",
       "type": "integer",
+      "description": "Maximum number of top challenges to return (5-30).",
       "default": 15,
       "minimum": 5,
       "maximum": 30,
