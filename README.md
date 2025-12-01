@@ -12,7 +12,7 @@ One click → get the top 5–20 rising challenges in your niche with:
 - Ready-to-post Markdown summary (copy → tweet → profit)
 
 ### Live Actor
-→ https://apify.com/youtube-lead-qualifier-pro/tiktok-viral-challenge-finde
+→ https://apify.com/youtube-lead-qualifier-pro/tiktok-viral-challenge-finder
 
 
 ### Input
