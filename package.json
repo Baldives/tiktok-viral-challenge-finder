@@ -1,0 +1,14 @@
+{
+  "name": "tiktok-viral-challenge-finder",
+  "version": "0.1.0",
+  "description": "Find the fastest-growing TikTok challenges before they explode",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "apify": "^3.1.11"
+  },
+  "author": "Baldives",
+  "license": "MIT"
+}
