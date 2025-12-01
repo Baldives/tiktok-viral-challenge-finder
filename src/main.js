@@ -1,4 +1,4 @@
-const Apify = require('apify');
+const Apify = require('apify'); 
 
 // ←←← THIS IS THE ONLY CHANGE NEEDED (new SDK style)
 Apify.main(async () => {
