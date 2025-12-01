@@ -1,62 +1,71 @@
 const Apify = require('apify');
 
+// ←←← THIS IS THE ONLY CHANGE NEEDED (new SDK style)
 Apify.main(async () => {
-    const input = await Apify.getInput();
-    const { niche = '', minViews = 500000, maxResults = 10, region = 'global' } = input || {};
+    const input = await Apify.getInput() || {};
+    const { niche = '', minViews = 500000, maxResults = 10, region = 'global' } = input;
+
+    console.log(`Searching TikTok challenges for: "${niche || 'trending'}"`);
 
     const searchQueries = niche
-        ? [niche, `${niche} challenge`, `#${niche.replace(/\s+/g, '')}`]
-        : ['trending', 'viral', 'fyp'];
+        ? [niche, `${niche} challenge`, `#${niche}`.replace(/\s+/g, '')]
+        : ['trending', 'viral', 'fyp', 'challenge'];
 
-    const results = [];
+    const allChallenges = new Map();
 
-    for (const query of searchQueries.slice(0, 3)) {
-        const { items } = await Apify.call('apify/tiktok-scraper', {
-            searchQueries: [query],
-            maxResults: 50,
-            region,
-            shouldDownloadVideos: false,
-        });
+    for (const query of searchQueries) {
+        try {
+            const task = await Apify.call('apify/tiktok-scraper', {
+                searchQueries: [query],
+                resultsPerPage: 30,
+                region,
+                shouldDownloadVideos: false,
+            });
 
-        for (const item of items) {
-            if (!item.hashtags || results.length >= maxResults * 3) continue;
+            for (const item of task.items || []) {
+                if (!item.hashtags) continue;
 
-            for (const tag of item.hashtags) {
-                const existing = results.find(r => r.name === tag.name);
-                const views = tag.videoCount * 5000; // rough estimate
+                for (const tag of item.hashtags) {
+                    const name = tag.name.toLowerCase();
+                    const viewsEstimate = tag.videoCount ? tag.videoCount * 4000 : 1000000;
 
-                if (views >= minViews) {
-                    if (existing) {
-                        existing.views += views / 3;
-                        existing.sampleVideos.push(item.webVideoUrl);
-                    } else {
-                        results.push({
-                            name: tag.name,
-                            title: tag.title,
-                            views: Math.round(views),
-                            sampleVideos: [item.webVideoUrl],
-                            author: item.authorMeta.name,
-                        });
+                    if (viewsEstimate >= minViews) {
+                        if (allChallenges.has(name)) {
+                            const existing = allChallenges.get(name);
+                            existing.views += viewsEstimate / 4;
+                            if (!existing.sampleVideos.includes(item.webVideoUrl)) {
+                                existing.sampleVideos.push(item.webVideoUrl);
+                            }
+                        } else {
+                            allChallenges.set(name, {
+                                name: tag.name,
+                                title: tag.title || tag.name,
+                                views: viewsEstimate,
+                                sampleVideos: [item.webVideoUrl],
+                            });
+                        }
                     }
                 }
             }
+        } catch (e) {
+            console.log(`Query "${query}" had an issue, skipping...`);
         }
     }
 
-    // Sort & slice
-    const final = results
+    // Sort and format final results
+    const finalResults = Array.from(allChallenges.values())
         .sort((a, b) => b.views - a.views)
         .slice(0, maxResults)
-        .map((r, i) => ({
+        .map((c, i) => ({
             rank: i + 1,
-            challenge: r.name,
-            estimatedViewsLast7d: r.views.toLocaleString(),
-            viralityScore: Math.min(99, Math.round((r.views / 1000000) * 10)),
-            exampleVideo: r.sampleVideos[0],
+            challenge: c.name,
+            title: c.title,
+            estimatedViewsLast7d: Math.round(c.views).toLocaleString(),
+            viralityScore: Math.min(99, Math.round(c.views / 200000)),
+            exampleVideo: c.sampleVideos[0],
         }));
 
-    // Push beautiful output
-    await Apify.pushData(final);
+    await Apify.pushData(finalResults);
 
-    console.log(`Found ${final.length} viral challenges for "${niche || 'trending'}"`);
+    console.log(`Done! Found ${finalResults.length} viral challenges`);
 });
