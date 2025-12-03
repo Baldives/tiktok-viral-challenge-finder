@@ -28,6 +28,14 @@
       "minimum": 5,
       "maximum": 30,
       "editor": "number"
+    },
+    "region": {
+      "type": "string",
+      "title": "Region",
+      "description": "Filter trends by geographic region.",
+      "default": "Global",
+      "enum": ["Global", "US", "UK"],
+      "editor": "select"
     }
   },
   "required": []
