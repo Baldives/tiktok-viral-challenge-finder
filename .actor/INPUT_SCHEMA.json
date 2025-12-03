@@ -6,7 +6,7 @@
     "niche": {
       "type": "string",
       "title": "Niche / Keyword",
-      "description": "Keyword or topic to narrow down trending challenges (e.g. \"dance\", \"fitness\", \"cooking\", \"GRWM\"). Leave empty for global trending.",
+      "description": "Keyword or topic to narrow down trending challenges (e.g. 'dance', 'fitness', 'cooking', 'GRWM'). Leave empty for global trending.",
       "default": ""
     },
     "minViews": {
@@ -24,13 +24,6 @@
       "default": 15,
       "minimum": 5,
       "maximum": 30
-    },
-    "region": {
-      "type": "string",
-      "title": "Region",
-      "description": "Filter trends by geographic region.",
-      "default": "Global",
-      "enum": ["Global", "US", "UK"]
     }
   },
   "required": []
