@@ -6,7 +6,7 @@
   "properties": {
     "niche": {
       "title": "Niche / Keyword",
-      "type": ["string", "null"],
+      "type": "string",
       "description": "Keyword or topic to narrow down trending challenges (e.g. \"dance\", \"fitness\", \"cooking\", \"GRWM\"). Leave empty for global trending.",
       "default": "",
       "prefill": "",
