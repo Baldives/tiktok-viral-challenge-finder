@@ -1,0 +1,72 @@
+{
+  "$id": "https://apify.com/baldives/tiktok-viral-challenge-finder/output-schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TikTok Viral Challenge Finder - Output Dataset Schema",
+  "description": "Output produced by the TikTok Viral Challenge Finder Actor (Dec 2025 version). Contains the top trending TikTok hashtag challenges with estimated 7-day views and a virality score.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "Rank",
+      "Challenge",
+      "Title",
+      "Est. Views (7d)",
+      "Virality Score",
+      "Example"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "Rank": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "Position of the challenge in the current top list (1 = most viral)."
+      },
+      "Challenge": {
+        "type": "string",
+        "pattern": "^#[A-Za-z0-9]+$",
+        "description": "The hashtag as it appears on TikTok (including the leading #)."
+      },
+      "Title": {
+        "type": "string",
+        "description": "Human-readable title/description of the challenge (derived from TikTok or cleaned from the hashtag)."
+      },
+      "Est. Views (7d)": {
+        "type": "string",
+        "pattern": "^\\d{1,3}(,\\d{3})*(\\.\\d+)?[KMB]?$",
+        "description": "Estimated total views across videos using this hashtag in the last ~7 days, formatted with commas (e.g., \"2,450,000\" or \"34,200,000\")."
+      },
+      "Virality Score": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 99,
+        "description": "Normalized score from 1–99 indicating current explosive potential (higher = more viral right now)."
+      },
+      "Example": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https://(www\\.)?tiktok\\.com/(@[a-zA-Z0-9._]+/video/|\\w+/video/)[0-9]+$",
+        "description": "Direct link to a real/high-performing example video that uses this challenge hashtag."
+      }
+    }
+  },
+  "examples": [
+    [
+      {
+        "Rank": 1,
+        "Challenge": "#HeatWaveChallenge",
+        "Title": "Heat Wave Dance",
+        "Est. Views (7d)": "2,016,000",
+        "Virality Score": 99,
+        "Example": "https://www.tiktok.com/@trending/video/743921"
+      },
+      {
+        "Rank": 2,
+        "Challenge": "#FoodTok",
+        "Title": "Viral Recipes",
+        "Est. Views (7d)": "3,408,000",
+        "Virality Score": 99,
+        "Example": "https://www.tiktok.com/@trending/video/743925"
+      }
+    ]
+  ]
+}
