@@ -1,4 +1,5 @@
 {
+  "actorOutputSchemaVersion": 1,
   "title": "Top TikTok Viral Challenges",
   "description": "Ranked list of currently exploding TikTok hashtag challenges with estimated 7-day views, virality score, and example videos.",
   "type": "array",
