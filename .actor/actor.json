@@ -8,8 +8,6 @@
   "inputSchema": "./INPUT_SCHEMA.json",
   "outputSchema": "./OUTPUT_SCHEMA.json",
   "storages": {
-    "dataset": {
-      "schema": "./DATASET_SCHEMA.json"
-    }
+    "dataset": "default"
   }
 }
