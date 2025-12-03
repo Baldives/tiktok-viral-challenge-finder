@@ -8,35 +8,32 @@
       "Rank": {
         "title": "Rank",
         "type": "integer",
-        "description": "Current position in the trending list (1 = most viral right now)"
+        "description": "Position in the current trending list (1 = hottest)"
       },
       "Challenge": {
         "title": "Hashtag",
         "type": "string",
-        "description": "The exact TikTok hashtag (e.g. #HeatWaveChallenge)"
+        "description": "The TikTok hashtag (includes the #)"
       },
       "Title": {
-        "title": "Challenge Name",
+        "title": "Challenge Title",
         "type": "string",
-        "description": "Human-readable title of the challenge"
+        "description": "Human-readable name of the challenge"
       },
       "Est. Views (7d)": {
-        "title": "Est. Views (7 days)",
+        "title": "Est. Views (7d)",
         "type": "string",
-        "description": "Estimated total views across all videos using this hashtag in the last ~7 days"
+        "description": "Estimated total views in the last ~7 days, formatted with commas"
       },
       "Virality Score": {
         "title": "Virality Score",
         "type": "integer",
-        "description": "Score from 1–99 (higher = exploding faster right now)",
-        "minimum": 1,
-        "maximum": 99
+        "description": "1–99 score (higher = exploding faster right now)"
       },
       "Example": {
-        "title": "Example Video",
+        "title": "Example Video URL",
         "type": "string",
-        "format": "uri",
-        "description": "Direct link to a real trending video using this challenge"
+        "description": "Direct link to a real trending video using this hashtag"
       }
     },
     "required": [
