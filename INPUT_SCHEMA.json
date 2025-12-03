@@ -1,6 +1,4 @@
 {
-  "$id": "https://apify.com/baldives/tiktok-viral-challenge-finder/input-schema.json",
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "TikTok Viral Challenge Finder",
   "description": "Find exploding TikTok challenges & viral hashtags before they peak. Real-time views + virality score. Perfect for creators & marketers.",
   "type": "object",
