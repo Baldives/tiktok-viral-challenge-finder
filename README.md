@@ -151,7 +151,5 @@ Also saves a tweet-ready summary under the key TWEET
 
 💵 Pricing
 
-This Actor is completely free to use on Apify.
-
-There is no usage fee, no pay-per-usage, and no subscription required.
-You can run it as many times as you like without any cost.
+This Actor uses pay-per-usage.
+Pricing is transparent and based on compute units, so you only pay for what you use.
