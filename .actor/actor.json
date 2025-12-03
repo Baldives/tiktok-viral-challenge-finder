@@ -6,8 +6,5 @@
   "description": "Find exploding TikTok challenges & viral hashtags before they peak. Optional keyword input. Real-time 7-day view estimates, virality scores, and top example videos.",
   "buildTag": "latest",
   "inputSchema": "./INPUT_SCHEMA.json",
-  "outputSchema": "./OUTPUT_SCHEMA.json",
-  "storages": {
-    "dataset": "default"
-  }
+  "outputSchema": "./OUTPUT_SCHEMA.json"
 }
