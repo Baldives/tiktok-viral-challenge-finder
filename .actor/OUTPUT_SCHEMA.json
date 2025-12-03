@@ -8,41 +8,19 @@
       "title": "Challenges",
       "description": "List of top TikTok viral challenges",
       "type": "array",
+      "template": "{{#each this}}{{Rank}}. {{Challenge}} - {{Title}} ({{Est. Views (7d)}} views, Score {{Virality Score}})\n{{Example}}\n\n{{/each}}",
       "items": {
         "type": "object",
         "properties": {
-          "Rank": {
-            "title": "Rank",
-            "type": "integer",
-            "description": "Position in the trending list (1 = hottest)"
-          },
-          "Challenge": {
-            "title": "Hashtag",
-            "type": "string",
-            "description": "The TikTok hashtag (includes the #)"
-          },
-          "Title": {
-            "title": "Challenge Title",
-            "type": "string",
-            "description": "Human-readable name of the challenge"
-          },
-          "Est. Views (7d)": {
-            "title": "Est. Views (7d)",
-            "type": "string",
-            "description": "Estimated total views in the last 7 days, formatted with commas"
-          },
-          "Virality Score": {
-            "title": "Virality Score",
-            "type": "integer",
-            "description": "Score from 1–99 indicating how viral the challenge is"
-          },
-          "Example": {
-            "title": "Example Video URL",
-            "type": "string",
-            "description": "Direct link to a trending TikTok video with this hashtag"
-          }
+          "Rank": { "title": "Rank", "type": "integer" },
+          "Challenge": { "title": "Hashtag", "type": "string" },
+          "Title": { "title": "Challenge Title", "type": "string" },
+          "Est. Views (7d)": { "title": "Est. Views (7d)", "type": "string" },
+          "Virality Score": { "title": "Virality Score", "type": "integer" },
+          "Example": { "title": "Example Video URL", "type": "string" }
         },
-        "required": ["Rank", "Challenge", "Title", "Est. Views (7d)", "Virality Score", "Example"]
+        "required": ["Rank", "Challenge", "Title", "Est. Views (7d)", "Virality Score", "Example"],
+        "template": "{{Rank}}. {{Challenge}} - {{Title}} ({{Est. Views (7d)}} views, Score {{Virality Score}})\n{{Example}}\n"
       }
     }
   },
