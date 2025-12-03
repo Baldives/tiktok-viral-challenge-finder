@@ -7,43 +7,30 @@
     "niche": {
       "title": "Niche / Keyword",
       "type": ["string", "null"],
-      "description": "Keyword or topic to narrow down trending challenges (e.g., \"dance\", \"fitness\", \"cooking\", \"GRWM\"). Leave empty or delete to get global top trending challenges.",
+      "description": "Keyword or topic to narrow down trending challenges (e.g. \"dance\", \"fitness\", \"cooking\", \"GRWM\"). Leave empty for global trending.",
       "default": "",
       "prefill": "",
-      "editor": "textfield",
-      "section": "Search Options"
+      "editor": "textfield"
     },
     "minViews": {
       "title": "Minimum Estimated Views (7 days)",
       "type": "integer",
-      "description": "Only include challenges with at least this many estimated views in the past ~7 days. Higher = more proven virality.",
+      "description": "Only show challenges with at least this many estimated views in the past ~7 days.",
       "default": 250000,
       "minimum": 10000,
       "maximum": 20000000,
       "unit": "views",
-      "editor": "number",
-      "section": "Filters"
+      "editor": "number"
     },
     "maxResults": {
       "title": "Max Challenges to Return",
       "type": "integer",
-      "description": "How many of the hottest challenges you want in the final list.",
+      "description": "How many of the hottest challenges to include (5–30).",
       "default": 15,
       "minimum": 5,
       "maximum": 30,
-      "editor": "number",
-      "section": "Filters"
+      "editor": "number"
     }
   },
-  "required": [],
-  "sections": [
-    {
-      "key": "Search Options",
-      "title": "Search Options"
-    },
-    {
-      "key": "Filters",
-      "title": "Filters"
-    }
-  ]
+  "required": []
 }
