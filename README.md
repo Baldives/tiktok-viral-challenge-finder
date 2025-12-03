@@ -65,45 +65,14 @@ One click → get the top 5–30 fastest-growing challenges with ready-to-post M
   "required": []
 }
 
-// 1. Global trending (default & most popular)
-{
-  "niche": "",
-  "minViews": 250000,
-  "maxResults": 15,
-  "region": "Global"
-}
 
-// 2. Dance challenges only
-{
-  "niche": "dance",
-  "minViews": 500000,
-  "maxResults": 10,
-  "region": "Global"
-}
-
-// 3. US fitness & workout trends
-{
-  "niche": "fitness",
-  "minViews": 300000,
-  "maxResults": 12,
-  "region": "US"
-}
-
-// 4. GRWM / Get Ready With Me (beauty & fashion)
-{
-  "niche": "GRWM",
-  "minViews": 200000,
-  "maxResults": 20,
-  "region": "Global"
-}
-
-// 5. Pet & animal content only
-{
-  "niche": "pet",
-  "minViews": 400000,
-  "maxResults": 10,
-  "region": "Global"
-}
+Use Case,niche,minViews,maxResults,region,Input JSON 
+Global trending (default),(empty),"250,000",15,Global,"json { ""niche"": """", ""minViews"": 250000, ""maxResults"": 15, ""region"": ""Global"" }"
+Dance challenges only,dance,"500,000",10,Global,"json { ""niche"": ""dance"", ""minViews"": 500000, ""maxResults"": 10, ""region"": ""Global"" }"
+US fitness & workout trends,fitness,"300,000",12,US,"json { ""niche"": ""fitness"", ""minViews"": 300000, ""maxResults"": 12, ""region"": ""US"" }"
+GRWM / beauty & fashion,GRWM,"200,000",20,Global,"json { ""niche"": ""GRWM"", ""minViews"": 200000, ""maxResults"": 20, ""region"": ""Global"" }"
+Pet & animal content,pet,"400,000",10,Global,"json { ""niche"": ""pet"", ""minViews"": 400000, ""maxResults"": 10, ""region"": ""Global"" }"
+Cooking recipes & food hacks,cooking,"350,000",12,Global,"json { ""niche"": ""cooking"", ""minViews"": 350000, ""maxResults"": 12, ""region"": ""Global"" }"
 
 
 {
@@ -113,62 +82,31 @@ One click → get the top 5–30 fastest-growing challenges with ready-to-post M
   "items": {
     "type": "object",
     "properties": {
-      "Rank": {
-        "title": "Rank",
-        "type": "integer",
-        "description": "Position in the current trending list (1 = hottest)"
-      },
-      "Challenge": {
-        "title": "Hashtag",
-        "type": "string",
-        "description": "The TikTok hashtag (includes the #)"
-      },
-      "Title": {
-        "title": "Challenge Title",
-        "type": "string",
-        "description": "Human-readable name of the challenge"
-      },
-      "Est. Views (7d)": {
-        "title": "Est. Views (7d)",
-        "type": "string",
-        "description": "Estimated total views in the last ~7 days, formatted with commas"
-      },
-      "Virality Score": {
-        "title": "Virality Score",
-        "type": "integer",
-        "description": "1–99 score (higher = exploding faster right now)"
-      },
-      "Example": {
-        "title": "Example Video URL",
-        "type": "string",
-        "description": "Direct link to a real trending video using this hashtag"
-      }
+      "Rank": { "title": "Rank", "type": "integer", "description": "Position in the current trending list (1 = hottest)" },
+      "Challenge": { "title": "Hashtag", "type": "string", "description": "The TikTok hashtag (includes the #)" },
+      "Title": { "title": "Challenge Title", "type": "string", "description": "Human-readable name of the challenge" },
+      "Est. Views (7d)": { "title": "Est. Views (7d)", "type": "string", "description": "Estimated total views in the last ~7 days, formatted with commas" },
+      "Virality Score": { "title": "Virality Score", "type": "integer", "description": "1–99 score (higher = exploding faster right now)" },
+      "Example": { "title": "Example Video URL", "type": "string", "description": "Direct link to a real trending video using this hashtag" }
     },
-    "required": [
-      "Rank",
-      "Challenge",
-      "Title",
-      "Est. Views (7d)",
-      "Virality Score",
-      "Example"
-    ]
+    "required": ["Rank", "Challenge", "Title", "Est. Views (7d)", "Virality Score", "Example"]
   }
 }
 
-
-1. #BeezInTheTrap – 45,200,000 views (7d) · Virality 98  
+1. #BeezInTheTrap – 45,200,000 views (7d) · Virality 98
    → https://www.tiktok.com/@buzzingpop/video/7375562393452380574
 
-2. #GreatLockIn – 32,800,000 views (7d) · Virality 95  
+2. #GreatLockIn – 32,800,000 views (7d) · Virality 95
    → https://www.tiktok.com/@clyrenai/video/7301234567890123456
 
-3. #AlibiDance – 28,500,000 views (7d) · Virality 92  
+3. #AlibiDance – 28,500,000 views (7d) · Virality 92
    → https://www.tiktok.com/@sevdaliza/video/7289023456789012345
 
-4. #EspressoDance – 24,100,000 views (7d) · Virality 89  
+4. #EspressoDance – 24,100,000 views (7d) · Virality 89
    → https://www.tiktok.com/@narjesse/video/7314567890123456789
 
-5. #LushLifeChoreo – 19,700,000 views (7d) · Virality 86  
+5. #LushLifeChoreo – 19,700,000 views (7d) · Virality 86
    → https://www.tiktok.com/@zara_larsson/video/7298765432109876543
+
 ...
 
