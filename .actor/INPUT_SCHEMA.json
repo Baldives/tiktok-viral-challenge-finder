@@ -1,35 +1,14 @@
 {
   "title": "TikTok Viral Challenge Finder",
-  "description": "Find exploding TikTok challenges & viral hashtags before they peak. Real-time views + virality score. Perfect for creators & marketers.",
+  "description": "Find exploding TikTok challenges & viral hashtags before they peak. Enter an optional niche keyword to filter results, or leave empty for global trending.",
   "type": "object",
-  "schemaVersion": 1,
   "properties": {
     "niche": {
       "title": "Niche / Keyword",
       "type": "string",
-      "description": "Keyword or topic to narrow down trending challenges (e.g. \"dance\", \"fitness\", \"cooking\", \"GRWM\"). Leave empty for global trending.",
+      "description": "Optional keyword to narrow down trending challenges (e.g., 'dance', 'fitness', 'cooking'). Leave empty for global trending.",
       "default": "",
-      "prefill": "",
       "editor": "textfield"
-    },
-    "minViews": {
-      "title": "Minimum Estimated Views (7 days)",
-      "type": "integer",
-      "description": "Only show challenges with at least this many estimated views in the past ~7 days.",
-      "default": 250000,
-      "minimum": 10000,
-      "maximum": 20000000,
-      "unit": "views",
-      "editor": "number"
-    },
-    "maxResults": {
-      "title": "Max Challenges to Return",
-      "type": "integer",
-      "description": "How many of the hottest challenges to include (5–30).",
-      "default": 15,
-      "minimum": 5,
-      "maximum": 30,
-      "editor": "number"
     }
   },
   "required": []
