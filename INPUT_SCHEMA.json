@@ -1,4 +1,6 @@
 {
+  "$id": "https://apify.com/baldives/tiktok-viral-challenge-finder/input-schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "TikTok Viral Challenge Finder",
   "description": "Find exploding TikTok challenges & viral hashtags before they peak. Real-time views + virality score. Perfect for creators & marketers.",
   "type": "object",
@@ -6,30 +8,44 @@
   "properties": {
     "niche": {
       "title": "Niche / Keyword",
-      "type": "string",
-      "description": "Keyword or topic to search for trending challenges (e.g., 'dance', 'fitness', 'food'). Leave empty for global trending.",
+      "type": ["string", "null"],
+      "description": "Keyword or topic to narrow down trending challenges (e.g., \"dance\", \"fitness\", \"cooking\", \"GRWM\"). Leave empty or delete to get global top trending challenges.",
+      "default": "",
+      "prefill": "",
       "editor": "textfield",
-      "prefill": ""
+      "section": "Search Options"
     },
     "minViews": {
-      "title": "Minimum estimated views (7 days)",
+      "title": "Minimum Estimated Views (7 days)",
       "type": "integer",
-      "description": "Filter challenges by minimum estimated views in the last 7 days (e.g., 250000 for 250K+ views).",
+      "description": "Only include challenges with at least this many estimated views in the past ~7 days. Higher = more proven virality.",
       "default": 250000,
       "minimum": 10000,
-      "maximum": 10000000,
+      "maximum": 20000000,
       "unit": "views",
-      "editor": "number"
+      "editor": "number",
+      "section": "Filters"
     },
     "maxResults": {
-      "title": "Max challenges to return",
+      "title": "Max Challenges to Return",
       "type": "integer",
-      "description": "Maximum number of top challenges to return (5-30).",
+      "description": "How many of the hottest challenges you want in the final list.",
       "default": 15,
       "minimum": 5,
       "maximum": 30,
-      "editor": "number"
+      "editor": "number",
+      "section": "Filters"
     }
   },
-  "required": []
+  "required": [],
+  "sections": [
+    {
+      "key": "Search Options",
+      "title": "Search Options"
+    },
+    {
+      "key": "Filters",
+      "title": "Filters"
+    }
+  ]
 }
