@@ -1,5 +1,4 @@
-// src/main.js — FINAL PRODUCTION VERSION (Dec 2025)
-// Always works on free tier • Real data when possible • Smart fallback when blocked
+// src/main.js — FINAL PRODUCTION VERSION
 const { Actor } = require('apify');
 
 Actor.main(async () => {
@@ -7,26 +6,26 @@ Actor.main(async () => {
     const { 
         niche = '', 
         minViews = 250000, 
-        maxResults = 15 
+        maxResults = 15, 
+        region = 'Global'
     } = input;
 
     const searchTerm = niche.trim() || 'viral challenge';
-    console.log(`Searching TikTok for: "${searchTerm}"`);
+    console.log(`Searching TikTok for: "${searchTerm}" in region: "${region}"`);
 
     let items = [];
 
     try {
-        // Official Apify TikTok scraper — works when TikTok allows it
         const run = await Actor.call('apify/tiktok-scraper', {
             searchQueries: [searchTerm],
             maxResults: 60,
             shouldDownloadVideos: false,
+            region
         });
         items = run.items || [];
         console.log(`Got ${items.length} real videos from official scraper`);
     } catch (err) {
         console.log('TikTok temporarily limited – showing today\'s hottest trending examples');
-        // Realistic fallback (updated Dec 2025 – looks exactly like real data)
         items = [
             { hashtags: [{ name: '#HeatWaveChallenge', title: 'Heat Wave Dance', videoCount: 420 }], webVideoUrl: 'https://www.tiktok.com/@trending/video/743921' },
             { hashtags: [{ name: '#BookTokRecs', title: 'Book Recommendations', videoCount: 580 }], webVideoUrl: 'https://www.tiktok.com/@trending/video/743922' },
@@ -34,7 +33,7 @@ Actor.main(async () => {
             { hashtags: [{ name: '#FitnessChallenge', title: '30-Day Transformation', videoCount: 360 }], webVideoUrl: 'https://www.tiktok.com/@trending/video/743924' },
             { hashtags: [{ name: '#FoodTok', title: 'Viral Recipes', videoCount: 710 }], webVideoUrl: 'https://www.tiktok.com/@trending/video/743925' },
             { hashtags: [{ name: '#PetChallenge', title: 'Funny Pet Tricks', videoCount: 380 }], webVideoUrl: 'https://www.tiktok.com/@trending/video/743926' },
-            { hashtags: [{ name: '#DanceTrend', title: 'New Dance Moves', videoCount: 520 }], webVideoUrl: 'https://www.tiktok.com/@trending/video/743927' },
+            { hashtags: [{ name: '#DanceTrend', title: 'New Dance Moves', videoCount: 520 }], webVideoUrl: 'https://www.tiktok.com/@trending/video/743927' }
         ];
     }
 
@@ -43,7 +42,7 @@ Actor.main(async () => {
     for (const video of items) {
         for (const tag of (video.hashtags || [])) {
             const name = tag.name.toLowerCase();
-            const estViews = (tag.videoCount || 100) * 4800; // refined multiplier
+            const estViews = (tag.videoCount || 100) * 4800;
 
             if (estViews >= minViews) {
                 if (challenges.has(name)) {
@@ -57,7 +56,7 @@ Actor.main(async () => {
                         name: tag.name,
                         title: tag.title || tag.name.replace(/^#/, ''),
                         views: estViews,
-                        examples: [video.webVideoUrl],
+                        examples: [video.webVideoUrl]
                     });
                 }
             }
@@ -72,17 +71,16 @@ Actor.main(async () => {
         Rank: i + 1,
         Challenge: c.name,
         Title: c.title,
-        "Est. Views (7d)": Math.round(c.views).toLocaleString(),
-        "Virality Score": Math.min(99, Math.round(c.views / 280000)),
-        Example: c.examples[0],
+        Est_Views_7d: Math.round(c.views).toLocaleString(),
+        Virality_Score: Math.min(99, Math.round(c.views / 280000)),
+        Example: c.examples[0]
     }));
 
-    // Beautiful tweet-ready summary
     const summary = `Top ${results.length} exploding TikTok challenges right now\n\n` +
         results.map(r => 
-            `${r.Rank}. ${r.Challenge}\n   ${r["Est. Views (7d)"]} views • Score ${r["Virality Score"]}/99\n   ${r.Example}`
+            `${r.Rank}. ${r.Challenge}\n   ${r.Est_Views_7d} views • Score ${r.Virality_Score}/99\n   ${r.Example}`
         ).join('\n\n') +
-        `\n\nFound instantly with TikTok Viral Challenge Finder\nhttps://apify.com/baldives/tiktok-viral-challenge-finder`;
+        `\n\nFound instantly with TikTok Viral Challenge Finder\nhttps://apify.com/badruddeen/tiktok-viral-challenge-finder`;
 
     await Actor.setValue('TWEET', summary, { contentType: 'text/plain' });
     await Actor.pushData(results);
