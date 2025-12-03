@@ -1,14 +1,36 @@
 {
-  "title": "TikTok Viral Challenge Finder",
-  "description": "Find exploding TikTok challenges & viral hashtags before they peak. Enter an optional niche keyword to filter results, or leave empty for global trending.",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TikTok Viral Challenge Finder Input",
   "type": "object",
   "properties": {
     "niche": {
-      "title": "Niche / Keyword",
       "type": "string",
-      "description": "Optional keyword to narrow down trending challenges (e.g., 'dance', 'fitness', 'cooking'). Leave empty for global trending.",
-      "default": "",
-      "editor": "textfield"
+      "title": "Niche / Keyword",
+      "description": "Keyword or topic to narrow down trending challenges (e.g. \"dance\", \"fitness\", \"cooking\", \"GRWM\"). Leave empty for global trending.",
+      "default": ""
+    },
+    "minViews": {
+      "type": "integer",
+      "title": "Minimum Estimated Views (7 days)",
+      "description": "Only show challenges with at least this many estimated views in the past ~7 days.",
+      "default": 250000,
+      "minimum": 10000,
+      "maximum": 20000000
+    },
+    "maxResults": {
+      "type": "integer",
+      "title": "Max Challenges to Return",
+      "description": "How many of the hottest challenges to include (5–30).",
+      "default": 15,
+      "minimum": 5,
+      "maximum": 30
+    },
+    "region": {
+      "type": "string",
+      "title": "Region",
+      "description": "Filter trends by geographic region.",
+      "default": "Global",
+      "enum": ["Global", "US", "UK"]
     }
   },
   "required": []
