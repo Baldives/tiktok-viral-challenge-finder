@@ -53,7 +53,7 @@ Example (string)
 Also stores a tweet-ready summary under the key TWEET.
 
 Example Output
-[
+```[
   {
     "Rank": 1,
     "Challenge": "#DanceTrend",
@@ -63,5 +63,5 @@ Example Output
     "Example": "https://www.tiktok.com/@trending/video/743927"
   }
 ]
-
+```
 Actor URL: https://apify.com/badruddeen/tiktok-viral-challenge-finder
