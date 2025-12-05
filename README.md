@@ -37,17 +37,19 @@ Real-time 7-day view estimates, virality scores, niche filtering, and direct exa
 ## Output Schema
 ```Returns an array of challenges with:
 
-Rank (integer)
-
-Challenge (string)
-
-Title (string)
-
-Est_Views_7d (string)
-
-Virality_Score (integer)
-
-Example (string)
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TikTok Viral Challenge Record",
+  "type": "object",
+  "properties": {
+    "Rank": { "type": "integer", "title": "Rank" },
+    "Challenge": { "type": "string", "title": "Hashtag" },
+    "Title": { "type": "string", "title": "Challenge Title" },
+    "Est_Views_7d": { "type": "string", "title": "Est. Views (7d)" },
+    "Virality_Score": { "type": "integer", "title": "Virality Score" },
+    "Example": { "type": "string", "title": "Example Video URL" }
+  },
+  "required": ["Rank", "Challenge", "Title", "Est_Views_7d", "Virality_Score", "Example"]
+}
 
 Also stores a tweet-ready summary under the key TWEET.
 ```
