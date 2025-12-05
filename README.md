@@ -36,7 +36,9 @@ Real-time 7-day view estimates, virality scores, niche filtering, and direct exa
 
 ## Output Schema
 Returns an array of challenges with:
-```  {
+
+```json
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "TikTok Viral Challenge List",
   "type": "array",
@@ -58,7 +60,8 @@ Also stores a tweet-ready summary under the key TWEET.
 
 ## Dataset Schema
 
-```{
+```json
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "TikTok Viral Challenge List",
   "type": "array",
@@ -78,7 +81,9 @@ Also stores a tweet-ready summary under the key TWEET.
 ```
 
 ## Example Output
-```[
+
+```json
+[
   {
     "Rank": 1,
     "Challenge": "#DanceTrend",
