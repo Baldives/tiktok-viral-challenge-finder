@@ -34,9 +34,8 @@ Real-time 7-day view estimates, virality scores, niche filtering, and direct exa
 }
 ```
 
-Output Schema
-
-Returns an array of challenges with:
+## Output Schema
+```Returns an array of challenges with:
 
 Rank (integer)
 
@@ -51,8 +50,9 @@ Virality_Score (integer)
 Example (string)
 
 Also stores a tweet-ready summary under the key TWEET.
+```
 
-Example Output
+## Example Output
 ```[
   {
     "Rank": 1,
