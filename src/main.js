@@ -1,6 +1,6 @@
 // src/main.js — TikTok Viral Challenge Finder (direct scraper + residential proxy)
 const { Actor } = require('apify');
-const { PlaywrightCrawler, ProxyConfiguration } = require('crawlee');
+const { PlaywrightCrawler } = require('crawlee');
 
 Actor.main(async () => {
     const input = await Actor.getInput() || {};
@@ -14,26 +14,20 @@ Actor.main(async () => {
     const searchTerm = niche.trim() || 'viral challenge';
     console.log(`Searching TikTok for: "${searchTerm}" in region: "${region}"`);
 
-    // --- Correct proxy configuration ---
-    const proxyConfiguration = new ProxyConfiguration({
-        useApifyProxy: true,
-        apifyProxyGroups: ['RESIDENTIAL'], // correct property
-    });
-
     let items = [];
 
+    // --- Playwright crawler with residential proxies ---
     const crawler = new PlaywrightCrawler({
-        proxyConfiguration,
+        useApifyProxy: true,
+        apifyProxyGroups: ['RESIDENTIAL'],
         launchContext: { launchOptions: { headless: true } },
         maxConcurrency: 5,
         requestHandler: async ({ page, request, log }) => {
             log.info(`Visiting ${request.url}`);
 
             try {
-                // Wait for TikTok videos to load
                 await page.waitForSelector('div[data-e2e="browse-video-card"]', { timeout: 10000 });
 
-                // Extract videos
                 const videosOnPage = await page.$$eval('div[data-e2e="browse-video-card"]', cards =>
                     cards.map(card => {
                         const hashtags = Array.from(card.querySelectorAll('a[href*="/tag/"]')).map(el => ({
@@ -138,5 +132,3 @@ Actor.main(async () => {
 
     console.log(`Finished! Delivered ${results.length} hot challenges`);
 });
-
-
