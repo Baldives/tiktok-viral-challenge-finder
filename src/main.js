@@ -23,10 +23,10 @@ Actor.main(async () => {
     region,
     proxy: {
         useApifyProxy: true,
-        apifyProxyGroups: ['RESIDENTIAL'],   // ⭐ This is the fix
-        // countryCode: 'US',                // optional
+        apifyProxyGroups: ['RESIDENTIAL']  // residential proxy is enabled
     }
 });
+
 
         items = run.items || [];
         console.log(`Got ${items.length} real videos from official scraper`);
