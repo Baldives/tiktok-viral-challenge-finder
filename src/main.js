@@ -1,4 +1,4 @@
-// src/main.js — TikTok Viral Challenge Finder
+// src/main.js — TikTok Viral Challenge Finder (residential proxy + retry with delay)
 const { Actor } = require('apify');
 
 Actor.main(async () => {
@@ -14,24 +14,45 @@ Actor.main(async () => {
     console.log(`Searching TikTok for: "${searchTerm}" in region: "${region}"`);
 
     let items = [];
+    const maxRetries = 3;
+    const retryDelayMs = 5000; // 5 seconds between retries
 
-    try {
-        const run = await Actor.call('apify/tiktok-scraper', {
-            searchQueries: [searchTerm],
-            maxResults: 60,
-            shouldDownloadVideos: false,
-            region,
-            proxy: {
-                useApifyProxy: true,
-                apifyProxyGroups: ['RESIDENTIAL'], // ✅ Residential proxy enabled
-                // countryCode: 'US', // optional: restrict to US IPs
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            const run = await Actor.call('apify/tiktok-scraper', {
+                searchQueries: [searchTerm],
+                maxResults: 60,
+                shouldDownloadVideos: false,
+                region,
+                proxy: {
+                    useApifyProxy: true,
+                    apifyProxyGroups: ['RESIDENTIAL'], // Residential proxy
+                }
+            });
+
+            console.log('Scraper used proxy IP:', run.proxyInfo?.ip || 'N/A');
+
+            items = run.items || [];
+            if (items.length > 0) {
+                console.log(`Got ${items.length} real videos from official scraper`);
+                break; // Success, exit retry loop
+            } else {
+                console.log(`Attempt ${attempt} returned 0 videos`);
             }
-        });
 
-        items = run.items || [];
-        console.log(`Got ${items.length} real videos from official scraper`);
-    } catch (err) {
-        console.log('TikTok temporarily limited – showing today\'s hottest trending examples');
+        } catch (err) {
+            console.log(`Attempt ${attempt} failed: ${err.message}`);
+        }
+
+        if (items.length === 0 && attempt < maxRetries) {
+            console.log(`Waiting ${retryDelayMs / 1000} seconds before next retry...`);
+            await new Promise(resolve => setTimeout(resolve, retryDelayMs));
+        }
+    }
+
+    // Fallback if scraper fails or returns 0 items
+    if (items.length === 0) {
+        console.log('All attempts failed – using fallback examples');
         items = [
             { hashtags: [{ name: '#HeatWaveChallenge', title: 'Heat Wave Dance', videoCount: 420 }], webVideoUrl: 'https://www.tiktok.com/@trending/video/743921' },
             { hashtags: [{ name: '#BookTokRecs', title: 'Book Recommendations', videoCount: 580 }], webVideoUrl: 'https://www.tiktok.com/@trending/video/743922' },
@@ -93,3 +114,4 @@ Actor.main(async () => {
 
     console.log(`Finished! Delivered ${results.length} hot challenges`);
 });
+
