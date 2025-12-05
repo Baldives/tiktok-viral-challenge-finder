@@ -14,9 +14,10 @@ Actor.main(async () => {
     const searchTerm = niche.trim() || 'viral challenge';
     console.log(`Searching TikTok for: "${searchTerm}" in region: "${region}"`);
 
+    // --- Correct proxy configuration ---
     const proxyConfiguration = new ProxyConfiguration({
-        groups: ['RESIDENTIAL'],
         useApifyProxy: true,
+        apifyProxyGroups: ['RESIDENTIAL'], // correct property
     });
 
     let items = [];
@@ -137,4 +138,5 @@ Actor.main(async () => {
 
     console.log(`Finished! Delivered ${results.length} hot challenges`);
 });
+
 
