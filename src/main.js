@@ -17,11 +17,17 @@ Actor.main(async () => {
 
     try {
         const run = await Actor.call('apify/tiktok-scraper', {
-            searchQueries: [searchTerm],
-            maxResults: 60,
-            shouldDownloadVideos: false,
-            region
-        });
+    searchQueries: [searchTerm],
+    maxResults: 60,
+    shouldDownloadVideos: false,
+    region,
+    proxy: {
+        useApifyProxy: true,
+        apifyProxyGroups: ['RESIDENTIAL'],   // ⭐ This is the fix
+        // countryCode: 'US',                // optional
+    }
+});
+
         items = run.items || [];
         console.log(`Got ${items.length} real videos from official scraper`);
     } catch (err) {
