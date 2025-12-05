@@ -32,6 +32,7 @@ Real-time 7-day view estimates, virality scores, niche filtering, and direct exa
   "maxResults": 10,
   "region": "Global"
 }
+```
 
 Output Schema
 
