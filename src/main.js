@@ -1,6 +1,6 @@
-// src/main.js — TikTok Viral Challenge Finder (direct scraper + residential proxy)
+// src/main.js — TikTok Viral Challenge Finder with proper residential proxy
 const { Actor } = require('apify');
-const { PlaywrightCrawler } = require('crawlee');
+const { PlaywrightCrawler, ProxyConfiguration } = require('crawlee');
 
 Actor.main(async () => {
     const input = await Actor.getInput() || {};
@@ -16,10 +16,13 @@ Actor.main(async () => {
 
     let items = [];
 
-    // --- Playwright crawler with residential proxies ---
+    // Correct residential proxy setup
+    const proxyConfiguration = new ProxyConfiguration({
+        groups: ['RESIDENTIAL'],  // residential proxies
+    });
+
     const crawler = new PlaywrightCrawler({
-        useApifyProxy: true,
-        apifyProxyGroups: ['RESIDENTIAL'],
+        proxyConfiguration,  // pass the proxy configuration here
         launchContext: { launchOptions: { headless: true } },
         maxConcurrency: 5,
         requestHandler: async ({ page, request, log }) => {
@@ -60,9 +63,7 @@ Actor.main(async () => {
         console.log('Crawler failed:', err.message);
     }
 
-    // -------------------------
     // Fallback if no videos
-    // -------------------------
     if (!items.length) {
         console.log('All attempts failed – using fallback examples');
         items = [
@@ -76,9 +77,7 @@ Actor.main(async () => {
         ];
     }
 
-    // -------------------------
     // Process and rank hashtags
-    // -------------------------
     const challenges = new Map();
 
     for (const video of items) {
@@ -124,9 +123,7 @@ Actor.main(async () => {
         ).join('\n\n') +
         `\n\nFound instantly with TikTok Viral Challenge Finder\nhttps://apify.com/badruddeen/tiktok-viral-challenge-finder`;
 
-    // -------------------------
     // Save results
-    // -------------------------
     await Actor.setValue('TWEET', summary, { contentType: 'text/plain' });
     await Actor.pushData(results);
 
