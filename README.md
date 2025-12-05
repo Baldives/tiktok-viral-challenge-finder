@@ -35,40 +35,45 @@ Real-time 7-day view estimates, virality scores, niche filtering, and direct exa
 ```
 
 ## Output Schema
-```Returns an array of challenges with:
-
+Returns an array of challenges with:
+```  {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TikTok Viral Challenge Record",
-  "type": "object",
-  "properties": {
-    "Rank": { "type": "integer", "title": "Rank" },
-    "Challenge": { "type": "string", "title": "Hashtag" },
-    "Title": { "type": "string", "title": "Challenge Title" },
-    "Est_Views_7d": { "type": "string", "title": "Est. Views (7d)" },
-    "Virality_Score": { "type": "integer", "title": "Virality Score" },
-    "Example": { "type": "string", "title": "Example Video URL" }
-  },
-  "required": ["Rank", "Challenge", "Title", "Est_Views_7d", "Virality_Score", "Example"]
+  "title": "TikTok Viral Challenge List",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "Rank": { "type": "integer" },
+      "Challenge": { "type": "string" },
+      "Title": { "type": "string" },
+      "Est_Views_7d": { "type": "string" },
+      "Virality_Score": { "type": "integer" },
+      "Example": { "type": "string" }
+    },
+    "required": ["Rank", "Challenge", "Title", "Est_Views_7d", "Virality_Score", "Example"]
+  }
 }
-
-Also stores a tweet-ready summary under the key TWEET.
 ```
+Also stores a tweet-ready summary under the key TWEET.
 
 ## Dataset Schema
 
 ```{
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TikTok Viral Challenge Record",
-  "type": "object",
-  "properties": {
-    "Rank": { "type": "integer", "title": "Rank" },
-    "Challenge": { "type": "string", "title": "Hashtag" },
-    "Title": { "type": "string", "title": "Challenge Title" },
-    "Est_Views_7d": { "type": "string", "title": "Est. Views (7d)" },
-    "Virality_Score": { "type": "integer", "title": "Virality Score" },
-    "Example": { "type": "string", "title": "Example Video URL" }
-  },
-  "required": ["Rank", "Challenge", "Title", "Est_Views_7d", "Virality_Score", "Example"]
+  "title": "TikTok Viral Challenge List",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "Rank": { "type": "integer" },
+      "Challenge": { "type": "string" },
+      "Title": { "type": "string" },
+      "Est_Views_7d": { "type": "string" },
+      "Virality_Score": { "type": "integer" },
+      "Example": { "type": "string" }
+    },
+    "required": ["Rank", "Challenge", "Title", "Est_Views_7d", "Virality_Score", "Example"]
+  }
 }
 ```
 
