@@ -1,4 +1,4 @@
-// src/main.js — FINAL PRODUCTION VERSION
+// src/main.js — TikTok Viral Challenge Finder
 const { Actor } = require('apify');
 
 Actor.main(async () => {
@@ -17,16 +17,16 @@ Actor.main(async () => {
 
     try {
         const run = await Actor.call('apify/tiktok-scraper', {
-    searchQueries: [searchTerm],
-    maxResults: 60,
-    shouldDownloadVideos: false,
-    region,
-    proxy: {
-        useApifyProxy: true,
-        apifyProxyGroups: ['RESIDENTIAL']  // residential proxy is enabled
-    }
-});
-
+            searchQueries: [searchTerm],
+            maxResults: 60,
+            shouldDownloadVideos: false,
+            region,
+            proxy: {
+                useApifyProxy: true,
+                apifyProxyGroups: ['RESIDENTIAL'], // ✅ Residential proxy enabled
+                // countryCode: 'US', // optional: restrict to US IPs
+            }
+        });
 
         items = run.items || [];
         console.log(`Got ${items.length} real videos from official scraper`);
